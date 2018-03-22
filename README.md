@@ -1,2 +1,13 @@
 # Ichi_Blog2
-basic blog template
+  
+  creating simple basic blog template using
+  
+  HTML5 & CSS
+  PHP
+  SQLITE
+  
+  on MVC frame work
+
+
+
+
