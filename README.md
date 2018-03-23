@@ -1,12 +1,17 @@
 # Ichi_Blog2
   
-      creating simple basic blog template using
+Creating simple basic blog template using
 
-      HTML5 & CSS
-      PHP
-      SQLITE
+  ### HTML5, PHP, SQLITE & CSS
 
-      on MVC frame work
+  - MVC frame work
+      
+  - Login form
+  
+  - SQLITE 
+  
+      user table 
+      post table
 
 
 
