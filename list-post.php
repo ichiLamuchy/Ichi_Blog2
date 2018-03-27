@@ -23,7 +23,6 @@ if ($_POST)
         }
     }
 }
-
 // Connect to the database, run a query
 $pdo = getPDO();
 $posts = getAllPosts($pdo);
