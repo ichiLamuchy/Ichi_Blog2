@@ -1,6 +1,7 @@
 <?php
 require_once 'lib/common.php';
 require_once 'lib/list-posts.php';
+
 session_start();
 
 // Don't let non-auth users see this screen
@@ -23,6 +24,7 @@ if ($_POST)
         }
     }
 }
+
 // Connect to the database, run a query
 $pdo = getPDO();
 $posts = getAllPosts($pdo);
@@ -38,19 +40,33 @@ $posts = getAllPosts($pdo);
         <?php require 'templates/top-menu.php' ?>
 
         <h1>Post list</h1>
-        
+
         <p>You have <?php echo count($posts) ?> posts.
-        
+
         <form method="post">
             <table id="post-list">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Creation date</th>
+                        <th>Comments</th>
+                        <th />
+                        <th />
+                    </tr>
+                </thead>
                 <tbody>
                     <?php foreach ($posts as $post): ?>
                         <tr>
                             <td>
-                                <?php echo htmlEscape($post['title']) ?>
+                                <a
+                                    href="view-post.php?post_id=<?php echo $post['id']?>"
+                                ><?php echo htmlEscape($post['title']) ?></a>
                             </td>
                             <td>
                                 <?php echo convertSqlDate($post['created_at']) ?>
+                            </td>
+                            <td>
+                                <?php echo $post['comment_count'] ?>
                             </td>
                             <td>
                                 <a href="edit-post.php?post_id=<?php echo $post['id']?>">Edit</a>

@@ -2,6 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/assets/main.css</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/logout.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/templates/list-comments.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/templates/head.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/edit-post.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/lib/common.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/list-post.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/view-post.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/login.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/templates/comment-form.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/templates/title.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/lib/list-post.php</file>
+            <file>file:/Applications/XAMPP/htdocs/Final/Ichi_Blog2/index.php</file>
+        </group>
     </open-files>
 </project-private>

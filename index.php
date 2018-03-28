@@ -1,62 +1,86 @@
-
 <?php
 require_once 'lib/common.php';
+require_once 'vendor/password_compat/lib/password.php';
 
-session_start();
-// Connect to the database, run a query, handle errors
-$pdo = getPDO();
-$stmt = $pdo->query(
-    'SELECT
-        id, title, created_at, body
-    FROM
-        post
-    ORDER BY
-        created_at DESC'
-);
-if ($stmt === false)
+// We need to test for a minimum version of PHP, because earlier versions have bugs that affect security
+if (version_compare(PHP_VERSION, '5.3.7') < 0)
 {
-    throw new Exception('There was a problem running this query');
+    throw new Exception(
+        'This system needs PHP 5.3.7 or later'
+    );
 }
 
-$notFound = isset($_GET['not-found']);
+session_start();
 
+// If we're already logged in, go back home
+if (isLoggedIn())
+{
+    redirectAndExit('index.php');
+}
+    
+// Handle the form posting
+$username = '';
+if ($_POST)
+{
+    // Init the database
+    $pdo = getPDO();
+
+    // We redirect only if the password is correct
+    $username = $_POST['username'];
+    $ok = tryLogin($pdo, $username, $_POST['password']);
+    if ($ok)
+    {
+        login($username);
+        redirectAndExit('index.php');
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>A blog application</title>
+        <title>
+            A blog application | Login
+        </title>
         <?php require 'templates/head.php' ?>
     </head>
     <body>
         <?php require 'templates/title.php' ?>
 
-        <?php if ($notFound): ?>
+        <?php // If we have a username, then the user got something wrong, so let's have an error ?>
+        <?php if ($username): ?>
             <div class="error box">
-                Error: cannot find the requested blog post
+                The username or password is incorrect, try again
             </div>
         <?php endif ?>
 
-        <div class="post-list">
-            <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-                <div class="post-synopsis">
-                    <h2>
-                        <?php echo htmlEscape($row['title']) ?>
-                    </h2>
-                    <div class="meta">
-                        <?php echo convertSqlDate($row['created_at']) ?>
-                        (<?php echo countCommentsForPost($pdo, $row['id']) ?> comments)
-                    </div>
-                    <p>
-                        <?php echo htmlEscape($row['body']) ?>
-                    </p>
-                    <div class="read-more">
-                        <a
-                            href="view-post.php?post_id=<?php echo $row['id'] ?>"
-                        >Read more...</a>
-                    </div>
-                </div>
-            <?php endwhile ?>
-        </div>
-
+        <p>Login here:</p>
+        
+        <form
+            method="post"
+            class="user-form"
+        >
+            <div>
+                <label for="username">
+                    Username:
+                </label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value="<?php echo htmlEscape($username) ?>"
+                />
+            </div>
+            <div>
+                <label for="password">
+                    Password:
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                />
+            </div>
+            <input type="submit" name="submit" value="Login" />
+        </form>
     </body>
 </html>
